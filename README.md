@@ -1,66 +1,78 @@
-# AI-First CRM – HCP Interaction Module
+# AI-Powered CRM HCP Interaction Logger
 
 ## Overview
-This project demonstrates an AI-powered CRM module designed for life science field representatives to log interactions with Healthcare Professionals (HCPs).
 
-Users can log interactions through:
-1. A structured form
-2. An AI assistant that converts natural language into CRM data.
+This project is an AI-powered CRM interaction logging system designed for healthcare sales representatives.  
+The system allows users to log interactions with healthcare professionals (HCPs) either through a structured form or using a conversational AI interface.
+
+The AI agent automatically extracts structured information such as doctor name, interaction type, topics discussed, sentiment, and follow-up actions from natural language text.
 
 ---
 
 ## Tech Stack
-Frontend: React  
-Backend: FastAPI  
-AI Processing: Groq API (conceptual LangGraph tools)
+
+Frontend:
+- React
+- Redux
+
+Backend:
+- Python
+- FastAPI
+
+AI Agent Framework:
+- LangGraph
+
+LLM:
+- Groq LLM (llama-3.3-70b-versatile)
+
+Database:
+- MySQL
+
+Font:
+- Google Inter
+
+---
+
+## System Architecture
+
+User → React Frontend → FastAPI Backend → LangGraph Agent → Groq LLM → MySQL Database
 
 ---
 
 ## Features
-• Log interactions with doctors  
-• AI assistant converts text into structured CRM data  
-• Sentiment detection  
-• Follow-up action suggestions  
-• Clean CRM-style interface  
+
+- Log HCP interactions using structured form
+- Conversational AI assistant for interaction logging
+- Automatic extraction of interaction details
+- Sentiment analysis of doctor feedback
+- Follow-up action suggestions
+- Edit previously logged interactions
+- MySQL database storage
 
 ---
 
-## Example AI Input
+## LangGraph AI Tools
 
-User writes:
+The AI agent uses multiple tools to process interaction text:
 
-Met Dr Sharma and discussed diabetes drug GlucoX.  
-Doctor seemed interested.  
-Follow up next week.
+1. Extract HCP Name  
+2. Detect Interaction Type  
+3. Extract Discussion Topics  
+4. Sentiment Analysis  
+5. Follow-up Recommendation
 
-AI extracts:
-
-Doctor Name: Dr Sharma  
-Sentiment: Positive  
-Topics: Diabetes drug discussion  
-Follow-up: Schedule next meeting
+These tools run sequentially in a LangGraph workflow.
 
 ---
 
-## Architecture
+## API Endpoints
 
-User → React Frontend → FastAPI Backend → AI Processing → Structured CRM Data
+### POST /ai-log
+Processes interaction text using the AI agent and stores structured data.
 
----
+Example request:
 
-## AI Tools Implemented
-
-1. Log Interaction  
-Stores interaction details in the CRM system.
-
-2. Edit Interaction  
-Allows modification of interaction data.
-
-3. Search HCP History  
-Retrieves previous interactions with doctors.
-
-4. Suggest Follow-up  
-AI suggests next engagement steps.
-
-5. Summarize Interaction  
-Converts meeting notes into structured CRM fields.
+```json
+{
+"text": "Met Dr Sharma today. He liked the diabetes drug and asked for samples."
+}
